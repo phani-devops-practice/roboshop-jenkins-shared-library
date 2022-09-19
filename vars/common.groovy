@@ -18,9 +18,9 @@ def publishArtifact() {
         zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar  
       """
     }
-    if (env.APP_TYPE == "golang") {
+    if (env.APP_TYPE == "python") {
       sh """
-        zip -r ${COMPONENT}-${TAG_NAME}.zip main.go 
+        zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt  
       """
     }
   }
