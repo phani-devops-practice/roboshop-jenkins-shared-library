@@ -7,12 +7,12 @@ def pipelineInit() {
 
 def publishArtifact() {
   stage('Prepare Artifacts') {
-    if (env.APP_TYPE == "nodejs")
+    if (env.APP_TYPE == "nodejs") {
       sh """
         zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
       """
     }
-    if (env.APP_TYPE == "maven")
+    if (env.APP_TYPE == "maven") {
       sh """
         mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
         zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar  
