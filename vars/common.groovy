@@ -18,6 +18,11 @@ def publishArtifact() {
         zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar  
       """
     }
+    if (env.APP_TYPE == "golang") {
+      sh """
+        zip -r ${COMPONENT}-${TAG_NAME}.zip main.go 
+      """
+    }
   }
 
   stage('Push Artifacts to Nexus') {
