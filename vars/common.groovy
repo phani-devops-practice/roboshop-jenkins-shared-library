@@ -5,10 +5,10 @@ def pipelineInit() {
     }
 }
 
-//def publishArtifact() {
-//    stage('Prepare Artifacts') {
-//        if (env.APP_TEST == "nodejs") {
-//
-//        }
-//    }
-//}
+def publishArtifact() {
+    stage('Prepare Artifacts') {
+      sh """
+        zip -r ${COMPONENT}.zip node_modules server.js
+      """
+    }
+}
