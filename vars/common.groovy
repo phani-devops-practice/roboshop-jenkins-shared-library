@@ -38,4 +38,17 @@ def publishArtifact() {
       """
     }
   }
-}    
+}
+
+def codeChecks() {
+  stage('unit test') {
+    parallel([
+            qualityChecks: {
+              echo "hello"
+            },
+            unitTests: {
+              echo "world"
+            }
+    ])
+  }
+}
