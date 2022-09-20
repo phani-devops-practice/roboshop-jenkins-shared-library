@@ -52,6 +52,7 @@ def codeChecks() {
               withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 sh """
                   sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.host.url=http://172.31.2.218:9000 -Dsonar.login=${user} -Dsonar.password=${pass}
+                  sonar-quality-gate.sh ${user} ${pass} 172.31.2.218 ${COMPONENT} 
                 """
               }
             },
