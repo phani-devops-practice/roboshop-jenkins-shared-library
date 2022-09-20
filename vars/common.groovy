@@ -63,36 +63,36 @@ def codeChecks() {
 }
 
 def unitTests() {
-   stage('Prepare Unittests') {
-     if (env.APP_TYPE == "nodejs") {
-       sh """
-         # npm run test
-         echo Run test cases
-       """
-     }
-     if (env.APP_TYPE == "maven") {
-       sh """
-         # mvn test
-         echo Run test cases
-       """
-     }
-     if (env.APP_TYPE == "python") {
-       sh """
-         # python -m unittest
-         echo Run test cases
-       """
-     }
-     if (env.APP_TYPE == "nginx") {
-       sh """
-         # npm run test
-         echo Run test cases
-       """
-     }
-     if (env.APP_TYPE == "golang") {
-       sh """
-         # go test
-         echo Run test cases
-       """
-     }
-   }
+  stage('Prepare Artifacts) {
+    if (env.APP_TYPE == "nodejs") {
+      sh """
+        # npm run test
+        echo Run test cases
+      """
+    }
+    if (env.APP_TYPE == "maven") {
+      sh """
+        # mvn test
+        echo Run test cases
+      """
+    }
+    if (env.APP_TYPE == "python") {
+      sh """
+        # python -m unittest
+        echo Run test cases
+      """
+    }
+    if (env.APP_TYPE == "nginx") {
+      sh """
+        # npm run test
+        echo Run test cases
+      """
+    }
+    if (env.APP_TYPE == "golang") {
+      sh """
+        # go test
+        echo Run test cases
+      """
+    }
+  }
 }
