@@ -29,6 +29,11 @@ def publishArtifact() {
         zip -r ../${COMPONENT}-${TAG_NAME}.zip *   
       """
     }
+    if (env.APP_TYPE == "golang") {
+      sh """
+        zip -r ../${COMPONENT}-${TAG_NAME}.zip main.go   
+      """
+    }
   }
 
   stage('Push Artifacts to Nexus') {
@@ -47,8 +52,43 @@ def codeChecks() {
               echo "hello"
             },
             unitTests: {
-              echo "world"
+              unitTests()
             }
     ])
+  }
+}
+
+def unitTests() {
+  stage('Prepare unitTests') {
+    if (env.APP_TYPE == "nodejs") {
+      sh """
+        # npm run test
+      echo Run test cases
+      """
+    }
+    if (env.APP_TYPE == "maven") {
+      sh """
+        # mvn test
+      echo Run test cases     
+      """
+    }
+    if (env.APP_TYPE == "python") {
+      sh """
+        # python -m unittest
+      echo Run test cases  
+      """
+    }
+    if (env.APP_TYPE == "nginx") {
+      sh """
+        # npm run test
+      echo Run test cases  
+      """
+    }
+    if (env.APP_TYPE == "golang") {
+      sh """
+        # go test
+      echo Run test cases   
+      """
+    }
   }
 }
