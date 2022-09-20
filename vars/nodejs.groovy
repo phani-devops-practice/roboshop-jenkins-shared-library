@@ -1,5 +1,4 @@
 def call() {
-  env.EXTRA_OPTS=""
   node() {
     common.pipelineInit()
     stage('Download dependencies') {
