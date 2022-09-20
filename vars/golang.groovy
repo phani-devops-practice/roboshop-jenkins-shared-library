@@ -1,4 +1,5 @@
 def call() {
+  env.EXTRA_OPTS=""
   node() {
     common.pipelineInit()
     stage('Download Dependencies') {
@@ -6,6 +7,8 @@ def call() {
       go get
       go build'''
     }
+    common.codeChecks()
+
     if(env.BRANCH_NAME == env.TAG_NAME)
     {
       common.publishArtifact()
