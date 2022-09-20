@@ -50,7 +50,7 @@ def codeChecks() {
     parallel([
             qualityChecks: {
               sh """
-                sonar-scanner -Dsonar.projectKey=${COMPONENT}
+                sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.host.url=http://172.31.2.218:9000
               """
             },
             unitTests: {
