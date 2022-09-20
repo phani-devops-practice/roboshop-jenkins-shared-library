@@ -49,9 +49,11 @@ def codeChecks() {
   stage('unit test') {
     parallel([
             qualityChecks: {
-              sh """
-                sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.host.url=http://172.31.2.218:9000
-              """
+              withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                sh """
+                  sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.host.url=http://172.31.2.218:9000 -Dsonar.login=${user} -Dsonar.password=${pass}
+                """
+              }
             },
             unitTests: {
               unitTests()
