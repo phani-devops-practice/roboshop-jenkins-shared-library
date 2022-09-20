@@ -46,13 +46,12 @@ def publishArtifact() {
 }
 
 def codeChecks() {
-  stage('unit test') {
+  stage('Quality checks and Unit tests') {
     parallel([
             qualityChecks: {
               withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 sh "sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.host.url=http://172.31.2.218:9000 -Dsonar.login=${user} -Dsonar.password=${pass}"
                 sh "sonar-quality-gate.sh ${user} ${pass} 172.31.2.218 ${COMPONENT} "
-                """
               }
             },
             unitTests: {
@@ -63,7 +62,7 @@ def codeChecks() {
 }
 
 def unitTests() {
-  stage('Prepare Artifacts) {
+  stage("Prepare Artifacts") {
     if (env.APP_TYPE == "nodejs") {
       sh """
         # npm run test
@@ -76,22 +75,25 @@ def unitTests() {
         echo Run test cases
       """
     }
+
     if (env.APP_TYPE == "python") {
       sh """
         # python -m unittest
         echo Run test cases
       """
     }
+
     if (env.APP_TYPE == "nginx") {
-      sh """
+      sh """ 
         # npm run test
         echo Run test cases
       """
     }
+
     if (env.APP_TYPE == "golang") {
       sh """
         # go test
-        echo Run test cases
+        echo Run test cases 
       """
     }
   }
