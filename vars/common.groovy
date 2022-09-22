@@ -32,7 +32,7 @@ def publishArtifact() {
     }
     if (env.APP_TYPE == "golang") {
       sh """
-        zip -r ../${ENV}-${COMPONENT}-${TAG_NAME}.zip main.go   
+        zip -r ${ENV}-${COMPONENT}-${TAG_NAME}.zip main.go   
       """
     }
   }
