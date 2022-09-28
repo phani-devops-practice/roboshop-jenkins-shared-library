@@ -30,11 +30,6 @@ def publishArtifact() {
         zip -r ../${ENV}-${COMPONENT}-${TAG_NAME}.zip *   
       """
     }
-    if (env.APP_TYPE == "golang") {
-      sh """
-        zip -r ${ENV}-${COMPONENT}-${TAG_NAME}.zip main.go   
-      """
-    }
   }
 
   stage('Push Artifacts to Nexus') {
